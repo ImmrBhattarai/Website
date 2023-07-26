@@ -1,0 +1,174 @@
+<!DOCTYPE html><html data-bs-theme="light" lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><title>Bhattrai dai</title>
+			<script>
+(function() {
+
+	// JavaScript snippet handling Dark/Light mode switching
+
+	const getStoredTheme = () => localStorage.getItem('theme');
+	const setStoredTheme = theme => localStorage.setItem('theme', theme);
+	const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
+
+	const getPreferredTheme = () => {
+
+		if (forcedTheme) return forcedTheme;
+
+		const storedTheme = getStoredTheme();
+		if (storedTheme) {
+			return storedTheme;
+		}
+
+		const pageTheme = document.documentElement.getAttribute('data-bs-theme');
+
+		if (pageTheme) {
+			return pageTheme;
+		}
+
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	}
+
+	const setTheme = theme => {
+		if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.setAttribute('data-bs-theme', 'dark');
+		} else {
+			document.documentElement.setAttribute('data-bs-theme', theme);
+		}
+	}
+
+	setTheme(getPreferredTheme());
+
+	const showActiveTheme = (theme, focus = false) => {
+		const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
+
+		if (!themeSwitchers.length) return;
+
+		document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+			element.classList.remove('active');
+			element.setAttribute('aria-pressed', 'false');
+		});
+
+		for (const themeSwitcher of themeSwitchers) {
+
+			const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
+
+			if (btnToActivate) {
+				btnToActivate.classList.add('active');
+				btnToActivate.setAttribute('aria-pressed', 'true');
+			}
+		}
+	}
+
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+		const storedTheme = getStoredTheme();
+		if (storedTheme !== 'light' && storedTheme !== 'dark') {
+			setTheme(getPreferredTheme());
+		}
+	});
+
+	window.addEventListener('DOMContentLoaded', () => {
+		showActiveTheme(getPreferredTheme());
+
+		document.querySelectorAll('[data-bs-theme-value]')
+			.forEach(toggle => {
+				toggle.addEventListener('click', (e) => {
+					e.preventDefault();
+					const theme = toggle.getAttribute('data-bs-theme-value');
+					setStoredTheme(theme);
+					setTheme(theme);
+					showActiveTheme(theme);
+				})
+			})
+	});
+})();
+</script><link rel="icon" type="image/png" sizes="500x500" href="assets/img/favicon.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"><link rel="stylesheet" href="assets/css/styles.min.css"></head><body><div class="theme-switcher dropdown bg-body border rounded position-fixed top-0 end-0 m-3"><button class="btn btn-link dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-body-color);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill mb-1">
+  <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+</svg></button><div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill opacity-50 me-2">
+  <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+</svg>Light</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="dark"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-moon-stars-fill opacity-50 me-2">
+  <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+  <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+</svg>Dark</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-circle-half opacity-50 me-2">
+  <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+</svg>Auto</a></div></div><div class="imageHold">
+    <img src="https://i.ibb.co/7pjCtzX/Suraj-Bhattrai.png" />
+</div><nav id="navigation">
+    <div class="container text-center">
+        <ul class="navHold">
+            <li><a href="index.html">Home</a></li>
+    </div>
+    <div class="logosmall hidels">
+        <img src="testlogosmall.png" height="24px" />
+    </div>
+	<div class="navResponsive"></div>
+</nav>
+
+
+<div class="container">
+    <article>
+        <h1>Robotics in Nepal</h1>
+        <p>Robotics is the interdisciplinary field that combines mechanical engineering, electronics, and computer
+            science to design, build, and operate machines capable of carrying out tasks autonomously or
+            semi-autonomously. Over the years, this fascinating technology has gained momentum worldwide, and Nepal is
+            no exception. As a nation with a rich cultural heritage and a rapidly growing technological landscape, Nepal
+            has embraced the potential of robotics and is making significant strides in its development. From
+            educational initiatives to innovative projects, the integration of robotics in Nepal is reshaping industries
+            and inspiring the nation's youth to become future pioneers in the field of automation and artificial
+            intelligence.</p>
+        <p><b>The Emergence of Robotics in Nepal:</b><br>
+
+            The journey of robotics in Nepal began with a few passionate individuals and organizations determined to
+            bring technological advancements to the country. Initially, robotics was mostly limited to academic
+            institutions, where students and professors engaged in research and experiments to understand and harness
+            the potential of robotics. Gradually, with the advent of various technology-driven events, workshops, and
+            competitions, interest in robotics began to surge among young minds.</p>
+        <p><b> Educational Initiatives:</b>
+
+            Recognizing the importance of nurturing young talents and fostering a passion for robotics, educational
+            initiatives have played a pivotal role in introducing robotics to Nepali students. Several schools and
+            colleges have started incorporating robotics into their curricula, either as standalone subjects or as part
+            of science and technology clubs. These initiatives aim to provide hands-on experience to students,
+            encouraging them to think critically, solve problems, and work collaboratively.
+
+            Furthermore, various organizations and non-profit groups have emerged to promote robotics education and
+            awareness across the country. These entities organize workshops, boot camps, and seminars, inviting experts
+            and enthusiasts to share knowledge and experiences. Additionally, robotics competitions such as Robocon
+            Nepal and First Lego League have gained popularity, motivating students to apply their theoretical learning
+            to practical challenges.
+        </p>
+        <p><b> Robotics in Industry:</b>
+
+            The implementation of robotics in Nepal's industrial landscape is steadily growing. Businesses in sectors
+            like manufacturing, agriculture, and healthcare are adopting robotic automation to streamline processes and
+            increase efficiency. In manufacturing, robots are being used for repetitive tasks, enhancing productivity
+            and reducing human error. In agriculture, the use of agricultural robots and drones has allowed farmers to
+            monitor crops, detect diseases, and optimize irrigation, leading to improved yields.
+
+            The healthcare industry has also witnessed the integration of robotics, particularly in surgeries and
+            medical procedures. Robotic surgical systems have enabled doctors to perform minimally invasive surgeries
+            with greater precision, resulting in reduced recovery times and improved patient outcomes.
+        </p>
+        <p><b> Challenges and Opportunities:</b>
+
+            While the robotics sector in Nepal is making progress, there are several challenges that need to be
+            addressed. Limited funding for research and development, lack of specialized training programs, and a
+            shortage of skilled professionals in the field pose hurdles to its widespread adoption. Additionally, the
+            rapid pace of technological advancements requires a consistent effort to keep up with the latest trends and
+            innovations.
+
+            However, amidst these challenges, there are numerous opportunities for growth. As the global demand for
+            automation and AI-powered solutions rises, Nepal can position itself as a hub for robotics development and
+            outsourcing. By investing in research and development, establishing partnerships with international
+            organizations, and providing comprehensive training to aspiring roboticists, Nepal can harness its potential
+            in the field and contribute to the global robotics ecosystem.
+        </p>
+        <p><b> Conclusion:</b>
+
+            Robotics in Nepal has come a long way from being a niche interest to a field with promising prospects for
+            the future. The country's commitment to fostering robotics education and integration in various industries
+            showcases its determination to be a part of the technological revolution. By nurturing young talents,
+            supporting research and development, and embracing innovation, Nepal is poised to make significant
+            contributions to the world of robotics and automation. As the nation continues to stride towards progress,
+            robotics will undoubtedly play a crucial role in shaping Nepal's future as a technologically advanced and
+            globally competitive nation.
+        </p>
+    </article>
+</div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script><script src="assets/js/script.min.js"></script></body></html>

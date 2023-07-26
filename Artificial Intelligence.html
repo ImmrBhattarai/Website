@@ -1,0 +1,136 @@
+<!DOCTYPE html><html data-bs-theme="light" lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><title>Bhattrai dai</title>
+			<script>
+(function() {
+
+	// JavaScript snippet handling Dark/Light mode switching
+
+	const getStoredTheme = () => localStorage.getItem('theme');
+	const setStoredTheme = theme => localStorage.setItem('theme', theme);
+	const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
+
+	const getPreferredTheme = () => {
+
+		if (forcedTheme) return forcedTheme;
+
+		const storedTheme = getStoredTheme();
+		if (storedTheme) {
+			return storedTheme;
+		}
+
+		const pageTheme = document.documentElement.getAttribute('data-bs-theme');
+
+		if (pageTheme) {
+			return pageTheme;
+		}
+
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	}
+
+	const setTheme = theme => {
+		if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.setAttribute('data-bs-theme', 'dark');
+		} else {
+			document.documentElement.setAttribute('data-bs-theme', theme);
+		}
+	}
+
+	setTheme(getPreferredTheme());
+
+	const showActiveTheme = (theme, focus = false) => {
+		const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
+
+		if (!themeSwitchers.length) return;
+
+		document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+			element.classList.remove('active');
+			element.setAttribute('aria-pressed', 'false');
+		});
+
+		for (const themeSwitcher of themeSwitchers) {
+
+			const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
+
+			if (btnToActivate) {
+				btnToActivate.classList.add('active');
+				btnToActivate.setAttribute('aria-pressed', 'true');
+			}
+		}
+	}
+
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+		const storedTheme = getStoredTheme();
+		if (storedTheme !== 'light' && storedTheme !== 'dark') {
+			setTheme(getPreferredTheme());
+		}
+	});
+
+	window.addEventListener('DOMContentLoaded', () => {
+		showActiveTheme(getPreferredTheme());
+
+		document.querySelectorAll('[data-bs-theme-value]')
+			.forEach(toggle => {
+				toggle.addEventListener('click', (e) => {
+					e.preventDefault();
+					const theme = toggle.getAttribute('data-bs-theme-value');
+					setStoredTheme(theme);
+					setTheme(theme);
+					showActiveTheme(theme);
+				})
+			})
+	});
+})();
+</script><link rel="icon" type="image/png" sizes="500x500" href="assets/img/favicon.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"><link rel="stylesheet" href="assets/css/styles.min.css"></head><body><div class="theme-switcher dropdown bg-body border rounded position-fixed top-0 end-0 m-3"><button class="btn btn-link dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-body-color);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill mb-1">
+  <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+</svg></button><div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill opacity-50 me-2">
+  <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+</svg>Light</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="dark"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-moon-stars-fill opacity-50 me-2">
+  <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+  <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+</svg>Dark</a><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-circle-half opacity-50 me-2">
+  <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+</svg>Auto</a></div></div><div class="imageHold">
+	<img src="https://i.ibb.co/94V4Z96/AI.png" />
+</div>
+<nav id="navigation">
+  <div class="container text-center">
+      <ul class="navHold">
+          <li><a href="index.html">Home</a></li>
+  </div>
+  <div class="logosmall hidels">
+      <img src="testlogosmall.png" height="24px" />
+  </div>
+<div class="navResponsive"></div>
+</nav>
+
+<div class="container">
+    <article>
+    
+        <h1>Artificial Intelligence</h1>
+  <p>AI is a branch of computer science that focuses on creating intelligent machines capable of performing tasks that typically require human intelligence. These tasks include learning, reasoning, problem-solving, perception, understanding natural language, and even interacting with humans in a human-like manner. Artificial Intelligence, often abbreviated as AI, has become a revolutionary technology that continues to shape various aspects of our lives. From the personalized recommendations on our favorite streaming platforms to the self-driving cars navigating our roads, AI has made a profound impact and has the potential to reshape industries and societies in the years to come.</p>
+
+  <p>The concept of AI dates back to ancient times, with myths and stories about artificial beings capable of independent thought. However, the modern field of AI began to take shape in the mid-20th century, following the development of electronic computers. In 1956, the Dartmouth Conference is considered the birth of AI as a formal discipline, where researchers gathered to discuss the possibility of creating machines that could mimic human intelligence.</p>
+
+  <p>Initially, AI researchers were optimistic about creating artificial general intelligence (AGI), machines with the ability to understand and learn any intellectual task that a human being can do. However, as they delved deeper into the complexities of human intelligence, it became evident that AGI was a distant goal. Instead, AI research branched into two main categories: Narrow AI and General AI.</p>
+
+  <p>Narrow AI, also known as Weak AI, is designed to perform a specific task or a set of tasks. Examples of narrow AI systems can be found all around us. Virtual personal assistants like Siri and Alexa, recommendation systems on e-commerce websites, and fraud detection algorithms used by banks are all examples of narrow AI applications. These systems excel at their designated tasks, but they lack the ability to transfer their knowledge to other domains.</p>
+
+  <p>On the other hand, General AI, also known as Strong AI or AGI, aims to develop machines with human-like cognitive abilities. These hypothetical machines would be capable of understanding, learning, and applying knowledge across various domains, just as humans can. Achieving AGI remains an ambitious and challenging goal for researchers, as it involves solving complex problems related to consciousness, self-awareness, and emotions.</p>
+
+  <p>One of the primary approaches in AI is machine learning, which enables machines to learn from data and improve their performance over time. There are three main types of machine learning: supervised learning, unsupervised learning, and reinforcement learning. In supervised learning, the algorithm is trained on labeled data, where the correct answers are provided. Unsupervised learning involves training the algorithm on unlabeled data and allowing it to find patterns and relationships on its own. Reinforcement learning is about training agents to make decisions in an environment, receiving feedback in the form of rewards or penalties.</p>
+
+  <p>The advancement in AI has led to remarkable achievements in various fields. In the healthcare industry, AI is helping to diagnose diseases more accurately and efficiently. AI-powered chatbots and virtual health assistants can provide 24/7 medical support, enhancing patient care. In finance, AI algorithms analyze vast amounts of data to detect fraudulent transactions and make better investment decisions. Transportation is also being revolutionized by AI through the development of autonomous vehicles, leading to the potential for safer roads and improved traffic management.</p>
+
+  <p>While AI offers numerous benefits, it also raises ethical concerns and challenges. One significant concern is the impact of AI on jobs and the workforce. As machines become more capable of performing tasks that were traditionally done by humans, there is a fear that AI could lead to job displacement and unemployment for certain professions. Society will need to adapt to these changes and explore ways to reskill and upskill the workforce to thrive in the AI era.</p>
+
+  <p>Another ethical issue revolves around AI's potential for bias and discrimination. AI algorithms learn from historical data, and if this data contains biases, the AI system can perpetuate and amplify those biases in its decision-making processes. Addressing and mitigating algorithmic bias is crucial to ensuring that AI benefits all members of society fairly.</p>
+
+  <p>Furthermore, the ethical considerations extend to questions about AI's impact on privacy and security. AI systems often require access to vast amounts of data to function effectively. Ensuring the responsible use and protection of personal data is essential to maintaining trust in AI technologies.</p>
+
+  <p>To address these concerns and drive responsible AI development and deployment, experts and policymakers are working on developing AI ethics frameworks and regulations. Transparency, explainability, and accountability are some of the key principles that guide the responsible use of AI.</p>
+
+  <p>In conclusion, AI is a groundbreaking field of computer science that continues to evolve rapidly, bringing both incredible opportunities and challenges. From its early beginnings as a dream of creating human-like machines, AI has now become an integral part of our lives, enhancing various industries and improving our daily experiences. As we move forward, it is essential to strike a balance between AI's potential benefits and its ethical implications, ensuring that AI is developed and used responsibly for the betterment of humanity.</p>
+
+    
+    </article>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script><script src="assets/js/script.min.js"></script></body></html>
